@@ -10,6 +10,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { CommonModule } from '@angular/common';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { CommonModule } from '@angular/common';
     NzInputModule,
     NzTableModule,
     NzDividerModule,
-    CommonModule
+    CommonModule,
+    NzModalModule
   ],
   declarations: [ClienteComponent],
   exports: [ClienteComponent]

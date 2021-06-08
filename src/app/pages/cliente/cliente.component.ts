@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 interface Person {
   key: string;
@@ -15,6 +16,8 @@ interface Person {
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
+
+  isVisible = false;
 
   listOfData: Person[] = [
     {
@@ -43,10 +46,32 @@ export class ClienteComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private modalService: NzModalService) { }
 
   ngOnInit() {
     console.log('OLA');
+  }
+
+  showModalClient() {
+    this.isVisible = true;
+  }
+
+  addClient(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+    this.success();
+  }
+
+  closeModalClient(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  success(): void {
+    const modal = this.modalService.success({
+      nzTitle: 'Cliente adicionado com sucesso!'
+    });
+    setTimeout(() => modal.destroy(), 2000);
   }
 
 }

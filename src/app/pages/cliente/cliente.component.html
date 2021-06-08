@@ -1,8 +1,19 @@
 <div class="header">
   <h1 class="title">Clientes</h1>
-  <button nz-button nzType="default" class="add">
+  <button (click)="showModalClient()" nz-button nzType="default" class="add">
     <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Adicionar
   </button>
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="The first Modal"
+    (nzOnCancel)="closeModalClient()"
+    (nzOnOk)="addClient()">
+    <ng-container *nzModalContent>
+      <p>Content one</p>
+      <p>Content two</p>
+      <p>Content three</p>
+    </ng-container>
+  </nz-modal>
 </div>
 
 <div>
