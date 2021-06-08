@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { ClienteService } from './cliente.service';
+import { Cliente } from './cliente';
 
 interface Person {
   key: string;
@@ -20,6 +22,7 @@ interface Person {
 export class ClienteComponent implements OnInit {
 
   validateForm!: FormGroup;
+  clientes: Cliente[] = [];
 
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
@@ -55,7 +58,7 @@ export class ClienteComponent implements OnInit {
     }
   ];
 
-  constructor(private modalService: NzModalService, private fb: FormBuilder) { }
+  constructor(private modalService: NzModalService, private fb: FormBuilder, private clienteService : ClienteService) { }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -66,6 +69,11 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.listClients();
+  }
+
+  listClients() : void {
+    this.clienteService.list().subscribe(dados => this.clientes = dados);
   }
 
   initForm(): void {
@@ -86,6 +94,7 @@ export class ClienteComponent implements OnInit {
   addClient(): void {
     // this.isVisible = false;
     this.submitForm();
+    console.log(this.clientes);
     // this.success();
   }
 
