@@ -65,6 +65,10 @@ export class ClienteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(): void {
     this.validateForm = this.fb.group({
       razaoSocial: [null, [Validators.required]],
       cnpj: [null, [Validators.required]],
@@ -75,7 +79,7 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  showModalClient() {
+  showModalClient(): void {
     this.isVisible = true;
   }
 
@@ -86,9 +90,7 @@ export class ClienteComponent implements OnInit {
   }
 
   closeModalClient(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsPristine();
-    }
+    this.initForm();
     this.isVisible = false;
   }
 
