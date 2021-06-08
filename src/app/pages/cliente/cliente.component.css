@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.title {
+  text-align: center;
+}
+.add {
+  position: absolute;
+  right: 0;
+}

@@ -1,0 +1,38 @@
+<div class="header">
+  <h1 class="title">Clientes</h1>
+  <button nz-button nzType="default" class="add">
+    <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Adicionar
+  </button>
+</div>
+
+<div>
+  <nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" nz-input placeholder="Buscar por Nome, CPF/CNPJ, E-mail, Celular" />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <i nz-icon nzType="search"></i>
+  </ng-template>
+</div>
+
+<div>
+  <nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Nome Fantasia</th>
+        <th>Representante Legal</th>
+        <th>Email</th>
+        <th>Data de Cadastro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.email}}</td>
+        <td>{{ data.dataCadastro }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
