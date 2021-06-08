@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 interface Person {
   key: string;
@@ -16,6 +18,13 @@ interface Person {
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
+
+  validateForm!: FormGroup;
+
+  captchaTooltipIcon: NzFormTooltipIcon = {
+    type: 'info-circle',
+    theme: 'twotone'
+  };
 
   isVisible = false;
 
@@ -46,10 +55,24 @@ export class ClienteComponent implements OnInit {
     }
   ];
 
-  constructor(private modalService: NzModalService) { }
+  constructor(private modalService: NzModalService, private fb: FormBuilder) { }
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+  }
 
   ngOnInit() {
-    console.log('OLA');
+    this.validateForm = this.fb.group({
+      razaoSocial: [null, [Validators.required]],
+      cnpj: [null, [Validators.required]],
+      nome: [null, null],
+      representante: [null, [Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
+      telefone: [null, [Validators.required]],
+    });
   }
 
   showModalClient() {
@@ -57,13 +80,15 @@ export class ClienteComponent implements OnInit {
   }
 
   addClient(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-    this.success();
+    // this.isVisible = false;
+    this.submitForm();
+    // this.success();
   }
 
   closeModalClient(): void {
-    console.log('Button cancel clicked!');
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsPristine();
+    }
     this.isVisible = false;
   }
 

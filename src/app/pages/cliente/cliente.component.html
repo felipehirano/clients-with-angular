@@ -5,13 +5,48 @@
   </button>
   <nz-modal
     [(nzVisible)]="isVisible"
-    nzTitle="The first Modal"
+    nzTitle="Adicionar Cliente"
     (nzOnCancel)="closeModalClient()"
     (nzOnOk)="addClient()">
     <ng-container *nzModalContent>
-      <p>Content one</p>
-      <p>Content two</p>
-      <p>Content three</p>
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="razaoSocial">Razão Social</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Razão Social Obrigatório!">
+            <input nz-input formControlName="razaoSocial" id="razaoSocial" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cnpj">CNPJ</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="CNPJ não é válido">
+            <input nz-input formControlName="cnpj" id="cnpj" class="ls-mask-cnpj" placeholder="Ex.: 00.000.000/0000-00"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nome">Nome Fantasia</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input formControlName="nome" id="nome" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="representante">Representante</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Representante Legal Obrigatório!">
+            <input nz-input formControlName="representante" id="representante" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email não é válido">
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="telefone">Telefone</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Telefone obrigatório">
+            <input nz-input formControlName="telefone" id="telefone" placeholder="Ex.: (00) 00000-0000"/>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
     </ng-container>
   </nz-modal>
 </div>

@@ -11,6 +11,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { CommonModule } from '@angular/common';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
   imports: [
@@ -22,7 +25,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzTableModule,
     NzDividerModule,
     CommonModule,
-    NzModalModule
+    NzModalModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzSelectModule
   ],
   declarations: [ClienteComponent],
   exports: [ClienteComponent]
