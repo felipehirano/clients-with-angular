@@ -19,7 +19,9 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cnpj">CNPJ</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="CNPJ não é válido">
-            <input nz-input formControlName="cnpj" id="cnpj" class="ls-mask-cnpj" placeholder="Ex.: 00.000.000/0000-00"/>
+            <input nz-input formControlName="cnpj" id="cnpj"
+            placeholder="Ex.: 00.000.000/0000-00" mask="00.000.000/0000-00"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -37,13 +39,14 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email não é válido">
-            <input nz-input formControlName="email" id="email" />
+            <input nz-input formControlName="email" id="email" placeholder="Ex.: example@gmail.com" />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="telefone">Telefone</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Telefone obrigatório">
-            <input nz-input formControlName="telefone" id="telefone" placeholder="Ex.: (00) 00000-0000"/>
+            <input nz-input formControlName="telefone" id="telefone" placeholder="Ex.: (00) 00000-0000"
+            mask="(00) 00000-0000"/>
           </nz-form-control>
         </nz-form-item>
       </form>
@@ -53,7 +56,7 @@
 
 <div>
   <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="Buscar por Nome, CPF/CNPJ, E-mail, Celular" />
+    <input type="text" nz-input placeholder="Buscar por Razão Social, CNPJ" />
   </nz-input-group>
   <ng-template #suffixIconSearch>
     <i nz-icon nzType="search"></i>

@@ -14,6 +14,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzModalModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzSelectModule
+    NzSelectModule,
+    NgxMaskModule.forChild()
   ],
   declarations: [ClienteComponent],
   exports: [ClienteComponent]

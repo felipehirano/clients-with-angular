@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(en);
 
@@ -29,7 +29,10 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false // ao salvar, vai manter a mascara
+    }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
