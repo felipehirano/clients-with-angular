@@ -20,10 +20,13 @@ export class ClienteComponent implements OnInit {
 
   validateForm!: FormGroup;
   clientes!: Cliente[];
+  clientesAux!: Cliente[];
 
-  isVisible = false;
+  searchValue = '';
+  isVisibleModalClient = false;
   showAlert = false;
   filtroRazaoSocial = '';
+  filterVisible = false;
 
   dadosModal: any = {
     companyName:  '',
@@ -46,6 +49,8 @@ export class ClienteComponent implements OnInit {
       (dados: any) => {
           this.clientes = dados.content;
           this.formatValues();
+
+          this.clientesAux = this.clientes;
         }
     );
   }
@@ -54,6 +59,7 @@ export class ClienteComponent implements OnInit {
     for (const i in this.clientes) {
       this.clientes[i].cnpj = this.formatCNPJ(this.clientes[i].cnpj);
       this.clientes[i].createdProduct = this.formatDate(this.clientes[i].createdProduct);
+      this.clientes[i].cliente = this.clientes[i].companyName + this.clientes[i].cnpj;
     }
   }
 
@@ -96,7 +102,7 @@ export class ClienteComponent implements OnInit {
   }
 
   showModalClient(): void {
-    this.isVisible = true;
+    this.isVisibleModalClient = true;
   }
 
   addClient(formIsValid: boolean): void {
@@ -107,7 +113,7 @@ export class ClienteComponent implements OnInit {
       if(this.cnpjIsValid(this.dadosModal)) {
         this.clienteService.insert(this.dadosModal).subscribe(
           (dados: any) => {
-            this.isVisible = false;
+            this.isVisibleModalClient = false;
             this.printMsgSuccess(dados.message);
             this.initForm();
           }
@@ -132,7 +138,7 @@ export class ClienteComponent implements OnInit {
 
   closeModalClient(): void {
     this.initForm();
-    this.isVisible = false;
+    this.isVisibleModalClient = false;
   }
 
   printMsgSuccess(msg: string): void {
@@ -140,6 +146,18 @@ export class ClienteComponent implements OnInit {
       nzTitle: msg
     });
     setTimeout(() => modal.destroy(), 3000);
+  }
+
+  reset(): void {
+    this.searchValue = '';
+    this.filterVisible = false;
+    this.clientes = this.clientesAux;
+  }
+
+  search(): void {
+    this.filterVisible = false;
+    this.clientes = this.clientes.filter((item: any) => item.cliente.indexOf(this.searchValue) !== -1);
+    console.log(this.clientes);
   }
 
 }

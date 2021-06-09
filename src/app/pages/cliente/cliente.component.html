@@ -4,7 +4,7 @@
     <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Adicionar
   </button>
   <nz-modal
-    [(nzVisible)]="isVisible"
+    [(nzVisible)]="isVisibleModalClient"
     nzTitle="Adicionar Cliente"
     (nzOnCancel)="closeModalClient()"
     (nzOnOk)="addClient(validateForm.valid)">
@@ -58,19 +58,15 @@
 </div>
 
 <div>
-  <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="Buscar por Razão Social/CNPJ" [(ngModel)]="filtroRazaoSocial" />
-  </nz-input-group>
-  <ng-template #suffixIconSearch>
-    <i nz-icon nzType="search"></i>
-  </ng-template>
-</div>
-
-<div>
   <nz-table #basicTable [nzData]="clientes">
     <thead>
       <tr>
-        <th>Cliente</th>
+        <th nzCustomFilter>
+          Clientes
+          <nz-filter-trigger [(nzVisible)]="filterVisible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+        </th>
         <th>Nome Fantasia</th>
         <th>Representante Legal</th>
         <th>Email</th>
@@ -79,12 +75,23 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td >{{data.companyName}} - {{ data.cnpj }}</td>
+        <td>{{ data.cliente }}</td>
         <td>{{ data.fantasyName }}</td>
         <td>{{ data.legalRepresentative }}</td>
-        <td>{{ data.email}}</td>
+        <td>{{ data.email }}</td>
         <td>{{ data.createdProduct }}</td>
       </tr>
     </tbody>
   </nz-table>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+      <div class="search-box">
+        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+          Search
+        </button>
+        <button nz-button nzSize="small" (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </nz-dropdown-menu>
 </div>

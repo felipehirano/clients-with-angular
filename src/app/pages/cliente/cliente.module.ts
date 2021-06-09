@@ -17,6 +17,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NgxMaskModule } from 'ngx-mask';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { FormsModule }   from '@angular/forms';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { FormsModule }   from '@angular/forms';
     NzSelectModule,
     NgxMaskModule.forChild(),
     NzAlertModule,
-    FormsModule
+    FormsModule,
+    NzDropDownModule
   ],
   declarations: [ClienteComponent],
   exports: [ClienteComponent]

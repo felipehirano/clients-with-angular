@@ -8,6 +8,7 @@ export interface Cliente {
   id: string,
   legalRepresentative: string,
   phoneNumber: string
+  cliente: string
 }
 
 
