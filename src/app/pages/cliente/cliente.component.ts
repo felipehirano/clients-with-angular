@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ClienteService } from './cliente.service';
 import { Cliente } from './cliente';
 
@@ -17,14 +16,16 @@ export class ClienteComponent implements OnInit {
 
   isVisible = false;
 
-  constructor(private modalService: NzModalService, private fb: FormBuilder, private clienteService : ClienteService) { }
-
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+  dadosModal: any = {
+    companyName:  '',
+    cnpj: '',
+    fantasyName: '',
+    legalRepresentative: '',
+    email: '',
+    phoneNumber: ''
   }
+
+  constructor(private modalService: NzModalService, private fb: FormBuilder, private clienteService : ClienteService) { }
 
   ngOnInit() {
     this.initForm();
@@ -42,9 +43,13 @@ export class ClienteComponent implements OnInit {
 
   formatValues(): void {
     for (const i in this.clientes) {
-      this.clientes[i].cnpj = this.clientes[i].cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\/\$4");
+      this.clientes[i].cnpj = this.formatCNPJ(this.clientes[i].cnpj);
       this.clientes[i].createdProduct = this.formatDate(this.clientes[i].createdProduct);
     }
+  }
+
+  formatCNPJ(cnpj: string): string {
+    return cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\/\$4");
   }
 
   formatDate(dateProduct: any): string {
@@ -65,17 +70,45 @@ export class ClienteComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       telefone: [null, [Validators.required]],
     });
+
+    this.resetDadosModal();
+  }
+
+  resetDadosModal(): void {
+    this.dadosModal = {
+      companyName:  '',
+      cnpj: '',
+      fantasyName: '',
+      legalRepresentative: '',
+      email: '',
+      phoneNumber: ''
+    }
   }
 
   showModalClient(): void {
     this.isVisible = true;
   }
 
-  addClient(): void {
-    // this.isVisible = false;
+  addClient(formIsValid: boolean): void {
+
     this.submitForm();
-    console.log(this.clientes);
-    // this.success();
+
+    if(formIsValid) {
+      this.clienteService.insert(this.dadosModal).subscribe(
+        (dados: any) => {
+          this.isVisible = false;
+          this.printMsgSuccess(dados.message);
+          this.initForm();
+        }
+      );
+    }
+  }
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
   }
 
   closeModalClient(): void {
@@ -83,11 +116,11 @@ export class ClienteComponent implements OnInit {
     this.isVisible = false;
   }
 
-  success(): void {
+  printMsgSuccess(msg: string): void {
     const modal = this.modalService.success({
-      nzTitle: 'Cliente adicionado com sucesso!'
+      nzTitle: msg
     });
-    setTimeout(() => modal.destroy(), 2000);
+    setTimeout(() => modal.destroy(), 3000);
   }
 
 }

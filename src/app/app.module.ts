@@ -31,7 +31,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     NgxMaskModule.forRoot({
-      dropSpecialCharacters: false // ao salvar, vai manter a mascara
+      dropSpecialCharacters: true // ao salvar, vai manter a mascara
     }),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
