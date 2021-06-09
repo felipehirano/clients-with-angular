@@ -59,7 +59,7 @@
 
 <div>
   <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="Buscar por Razão Social, CNPJ" />
+    <input type="text" nz-input placeholder="Buscar por Razão Social/CNPJ" [(ngModel)]="filtroRazaoSocial" />
   </nz-input-group>
   <ng-template #suffixIconSearch>
     <i nz-icon nzType="search"></i>
@@ -79,7 +79,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td >{{ data.cnpj }}</td>
+        <td >{{data.companyName}} - {{ data.cnpj }}</td>
         <td>{{ data.fantasyName }}</td>
         <td>{{ data.legalRepresentative }}</td>
         <td>{{ data.email}}</td>

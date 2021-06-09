@@ -23,6 +23,7 @@ export class ClienteComponent implements OnInit {
 
   isVisible = false;
   showAlert = false;
+  filtroRazaoSocial = '';
 
   dadosModal: any = {
     companyName:  '',
