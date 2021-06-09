@@ -146,6 +146,7 @@ export class ClienteComponent implements OnInit {
       nzTitle: msg
     });
     setTimeout(() => modal.destroy(), 3000);
+    this.listClients();
   }
 
   reset(): void {
