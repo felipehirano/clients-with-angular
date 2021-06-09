@@ -3,6 +3,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from './cliente.service';
 import { Cliente } from './cliente';
+import validator from 'cpf-cnpj-validator';
+
+declare var require: any
+
+const Joi = require('@hapi/joi').extend(validator)
 
 @Component({
   selector: 'app-cliente',
@@ -11,10 +16,13 @@ import { Cliente } from './cliente';
 })
 export class ClienteComponent implements OnInit {
 
+  cnpjSchema = Joi.document().cnpj();
+
   validateForm!: FormGroup;
   clientes!: Cliente[];
 
   isVisible = false;
+  showAlert = false;
 
   dadosModal: any = {
     companyName:  '',
@@ -72,6 +80,7 @@ export class ClienteComponent implements OnInit {
     });
 
     this.resetDadosModal();
+    this.showAlert = false;
   }
 
   resetDadosModal(): void {
@@ -94,14 +103,23 @@ export class ClienteComponent implements OnInit {
     this.submitForm();
 
     if(formIsValid) {
-      this.clienteService.insert(this.dadosModal).subscribe(
-        (dados: any) => {
-          this.isVisible = false;
-          this.printMsgSuccess(dados.message);
-          this.initForm();
-        }
-      );
+      if(this.cnpjIsValid(this.dadosModal)) {
+        this.clienteService.insert(this.dadosModal).subscribe(
+          (dados: any) => {
+            this.isVisible = false;
+            this.printMsgSuccess(dados.message);
+            this.initForm();
+          }
+        );
+      }else {
+        this.showAlert = true;
+      }
     }
+  }
+
+  cnpjIsValid(cliente: any): boolean {
+    if(this.cnpjSchema.validate(cliente.cnpj).error) return false;
+    else return true;
   }
 
   submitForm(): void {

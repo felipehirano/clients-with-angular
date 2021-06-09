@@ -9,7 +9,8 @@
     (nzOnCancel)="closeModalClient()"
     (nzOnOk)="addClient(validateForm.valid)">
     <ng-container *nzModalContent>
-      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-alert nzType="error" nzCloseable nzMessage="CNPJ não é válido" *ngIf="showAlert"></nz-alert>
+      <form class="form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="razaoSocial">Razão Social</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Razão Social Obrigatório!">
