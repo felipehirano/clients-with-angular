@@ -22,12 +22,7 @@ interface Person {
 export class ClienteComponent implements OnInit {
 
   validateForm!: FormGroup;
-  clientes: Cliente[] = [];
-
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
+  clientes!: Cliente[];
 
   isVisible = false;
 
@@ -73,7 +68,18 @@ export class ClienteComponent implements OnInit {
   }
 
   listClients() : void {
-    this.clienteService.list().subscribe(dados => this.clientes = dados);
+    this.clienteService.list().subscribe(
+      (dados: any) => {
+          this.clientes = dados.content;
+          this.formatValues();
+        }
+    );
+  }
+
+  formatValues(): void {
+    for (const i in this.clientes) {
+      this.clientes[i].cnpj = this.clientes[i].cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\/\$4");
+    }
   }
 
   initForm(): void {

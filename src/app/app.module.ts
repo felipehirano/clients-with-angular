@@ -38,3 +38,5 @@ registerLocaleData(en);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// ng serve --port 0 --open
