@@ -58,7 +58,12 @@
 </div>
 
 <div>
-  <nz-table #basicTable [nzData]="clientes">
+  <nz-table
+    #basicTable
+    nzShowPagination
+    nzShowSizeChanger
+    [nzData]="clientes"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
     <thead>
       <tr>
         <th nzCustomFilter>

@@ -21,6 +21,7 @@ export class ClienteComponent implements OnInit {
   validateForm!: FormGroup;
   clientes!: Cliente[];
   clientesAux!: Cliente[];
+  listOfCurrentPageData: ReadonlyArray<Cliente> = [];
 
   searchValue = '';
   isVisibleModalClient = false;
@@ -59,7 +60,7 @@ export class ClienteComponent implements OnInit {
     for (const i in this.clientes) {
       this.clientes[i].cnpj = this.formatCNPJ(this.clientes[i].cnpj);
       this.clientes[i].createdProduct = this.formatDate(this.clientes[i].createdProduct);
-      this.clientes[i].cliente = this.clientes[i].companyName + this.clientes[i].cnpj;
+      this.clientes[i].cliente = this.clientes[i].companyName + " - " + this.clientes[i].cnpj;
     }
   }
 
@@ -159,6 +160,10 @@ export class ClienteComponent implements OnInit {
     this.filterVisible = false;
     this.clientes = this.clientes.filter((item: any) => item.cliente.indexOf(this.searchValue) !== -1);
     console.log(this.clientes);
+  }
+
+  onCurrentPageDataChange(listOfCurrentPageData: ReadonlyArray<Cliente>): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
 }
