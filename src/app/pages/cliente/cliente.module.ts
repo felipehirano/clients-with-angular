@@ -18,6 +18,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { FormsModule }   from '@angular/forms';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { AdicionarClienteComponent } from './components/adicionar-cliente/adicionar-cliente.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     FormsModule,
     NzDropDownModule
   ],
-  declarations: [ClienteComponent],
+  declarations: [ClienteComponent, AdicionarClienteComponent],
   exports: [ClienteComponent]
 })
 export class ClienteModule { }
