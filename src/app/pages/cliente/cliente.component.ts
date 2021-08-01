@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from './cliente.service';
-import { Cliente } from './cliente';
+import { Cliente } from '../interfaces/cliente';
 import validator from 'cpf-cnpj-validator';
 
 declare var require: any

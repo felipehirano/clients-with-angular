@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_GET: 'https://gsb-new-onboarding-api-gateway.herokuapp.com/pix-pos-service/clients',
+  API_POST: 'https://gsb-new-onboarding-api-gateway.herokuapp.com/pix-pos-service/clients/create-client-pj'
 };
 
 /*
