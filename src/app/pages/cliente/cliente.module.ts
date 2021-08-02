@@ -19,6 +19,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { FormsModule }   from '@angular/forms';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { AdicionarClienteComponent } from './components/adicionar-cliente/adicionar-cliente.component';
+import { ListarClientesComponent } from './components/listar-clientes/listar-clientes.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { AdicionarClienteComponent } from './components/adicionar-cliente/adicio
     FormsModule,
     NzDropDownModule
   ],
-  declarations: [ClienteComponent, AdicionarClienteComponent],
+  declarations: [ClienteComponent, AdicionarClienteComponent, ListarClientesComponent],
   exports: [ClienteComponent]
 })
 export class ClienteModule { }
