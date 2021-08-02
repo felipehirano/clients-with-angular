@@ -11,7 +11,6 @@ export class ClienteComponent implements OnInit {
 
   clientes!: Cliente[];
   clientesAux!: Cliente[];
-  listOfCurrentPageData: ReadonlyArray<Cliente> = [];
 
   searchValue = '';
   isVisibleModalClient = false;
@@ -73,10 +72,6 @@ export class ClienteComponent implements OnInit {
     this.filterVisible = false;
     this.clientes = this.clientes.filter((item: any) => item.cliente.indexOf(this.searchValue) !== -1);
     console.log(this.clientes);
-  }
-
-  onCurrentPageDataChange(listOfCurrentPageData: ReadonlyArray<Cliente>): void {
-    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
 }

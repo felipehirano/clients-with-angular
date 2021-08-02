@@ -6,50 +6,18 @@
   <app-adicionar-cliente
     [isVisibleModalClient]="isVisibleModalClient"
     (onClose)="closeModalClient()"
-    (onUpdateClients)="listClients()">
+    (onUpdateClients)="listClients()"
+  >
   </app-adicionar-cliente>
 </div>
-<app-listar-clientes></app-listar-clientes>
-<!-- <div>
-  <nz-table
-    #basicTable
-    nzShowPagination
-    nzShowSizeChanger
-    [nzData]="clientes"
-    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
-    <thead>
-      <tr>
-        <th nzCustomFilter>
-          Clientes
-          <nz-filter-trigger [(nzVisible)]="filterVisible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-        </th>
-        <th>Nome Fantasia</th>
-        <th>Representante Legal</th>
-        <th>Email</th>
-        <th>Data de Cadastro</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.cliente }}</td>
-        <td>{{ data.fantasyName }}</td>
-        <td>{{ data.legalRepresentative }}</td>
-        <td>{{ data.email }}</td>
-        <td>{{ data.createdProduct }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
-  <nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
-        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
-          Filtrar
-        </button>
-        <button nz-button nzSize="small" (click)="reset()">Limpar</button>
-      </div>
-    </div>
-  </nz-dropdown-menu>
-</div> -->
+<div>
+  <app-listar-clientes
+    [clientes]="clientes"
+    [clientesAux]="clientesAux"
+    [filterVisible]="filterVisible"
+    [searchValue]="searchValue"
+    [search]="search"
+    [reset]="reset"
+  >
+  </app-listar-clientes>
+</div>
