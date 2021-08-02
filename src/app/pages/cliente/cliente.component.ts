@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from './cliente.service';
 import { Cliente } from './interfaces/cliente';
+import { Utils } from './utils/utils';
 
 @Component({
   selector: 'app-cliente',
@@ -16,7 +17,10 @@ export class ClienteComponent implements OnInit {
   isVisibleModalClient = false;
   filterVisible = false;
 
-  constructor(private clienteService : ClienteService) {}
+  constructor(
+    private clienteService : ClienteService,
+    private utils: Utils
+  ) {}
 
   ngOnInit() {
     this.listClients();
@@ -26,32 +30,11 @@ export class ClienteComponent implements OnInit {
     this.clienteService.list().subscribe(
       (dados: any) => {
           this.clientes = dados.content;
-          this.formatValues();
+          this.utils.formatValues(this.clientes);
 
           this.clientesAux = this.clientes;
         }
     );
-  }
-
-  formatValues(): void {
-    for (const i in this.clientes) {
-      this.clientes[i].cnpj = this.formatCNPJ(this.clientes[i].cnpj);
-      this.clientes[i].createdProduct = this.formatDate(this.clientes[i].createdProduct);
-      this.clientes[i].cliente = this.clientes[i].companyName + " - " + this.clientes[i].cnpj;
-    }
-  }
-
-  formatCNPJ(cnpj: string): string {
-    return cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\/\$4");
-  }
-
-  formatDate(dateProduct: any): string {
-
-    const dd = dateProduct.slice(8,10);
-    const mm = dateProduct.slice(5, 7);
-    const yy = dateProduct.slice(0, 4);
-
-    return dd + '/' + mm + '/' + yy;
   }
 
   showModalClient(): void {
